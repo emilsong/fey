@@ -1,0 +1,30 @@
+{
+  "name": "fey",
+  "version": "0.1.6",
+  "description": "may be the most simple front-end developing platform",
+  "main": "app.js",
+  "bin": {
+    "fey": "bin/fey"
+  },
+  "dependencies": {
+    "express": "^4.10.2",
+    "socket.io": "^1.2.1",
+	"imagemin": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renrenfed/fey"
+  },
+  "keywords": [
+    "front-end",
+    "develop"
+  ],
+  "author": "Emil Song",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/renrenfed/fey/issues"
+  },
+  "homepage": "https://github.com/renrenfed/fey"
+}

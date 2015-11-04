@@ -1,0 +1,72 @@
+<html>
+<head>
+
+
+</head>
+<body>
+	
+	<textarea id="less" style="width:100%; height:300px;" placeholder="输入要编译或压缩的less/css代码"></textarea>
+	<br/>
+	<br/>
+	<button onclick="javascript:compile()">编译LESS</button>
+	<button onclick="javascript:compile(true)">压缩</button>
+	<button onclick="javascript:de()">美化</button>
+
+<script src="less.min.js"></script>
+<script src="cssbeautify.js"></script>
+<script>
+function encode(code){
+
+	code = code.replace(/\n/ig,''); 
+	code = code.replace(/(\s){2,}/ig,'$1'); 
+	code = code.replace(/\t/ig,''); 
+	code = code.replace(/\n\}/ig,'\}'); 
+	code = code.replace(/\n\{\s*/ig,'\{'); 
+	code = code.replace(/(\S)\s*\}/ig,'$1\}'); 
+	code = code.replace(/(\S)\s*\{/ig,'$1\{'); 
+	code = code.replace(/\{\s*(\S)/ig,'\{$1'); 
+	return code; 
+} 
+
+function decode(code){ 
+
+	code = code.replace(/(\s){2,}/ig,'$1'); 
+	code = code.replace(/(\S)\s*\{/ig,'$1 {'); 
+	code = code.replace(/\*\/(.[^\}\{]*)}/ig,'\*\/\n$1}'); 
+	code = code.replace(/\/\*/ig,'\n\/\*'); 
+	code = code.replace(/;\s*(\S)/ig,';\n\t$1'); 
+	code = code.replace(/\}\s*(\S)/ig,'\}\n$1'); 
+	code = code.replace(/\n\s*\}/ig,'\n\}'); 
+	code = code.replace(/\{\s*(\S)/ig,'\{\n\t$1'); 
+	code = code.replace(/(\S)\s*\*\//ig,'$1\*\/'); 
+	code = code.replace(/\*\/\s*([^\}\{]\S)/ig,'\*\/\n\t$1'); 
+	code = code.replace(/(\S)\}/ig,'$1\n\}'); 
+	code = code.replace(/(\n){2,}/ig,'\n'); 
+	code = code.replace(/:/ig,': '); 
+	code = code.replace(/  /ig,' '); 
+	return code; 
+} 
+
+var textarea = document.getElementById("less");
+function compile(compress){
+	var compress = compress||false;
+	less.render(textarea.value,{compress:compress}, function (e, css) {
+		textarea.value = css.css;
+	});
+
+}
+
+
+function de(){
+	var beautified = cssbeautify(textarea.value, {
+		indent: '        ',
+		openbrace: 'end-of-line',//separate-line
+		autosemicolon: true
+	});
+	textarea.value = beautified;
+}
+
+
+</script>
+</body>
+</html>
